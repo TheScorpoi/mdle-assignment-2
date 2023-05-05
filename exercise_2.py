@@ -6,10 +6,9 @@ from pyspark.sql.functions import col
 from pyspark.sql.functions import explode
 from pyspark.sql.functions import abs
 
-# Create a SparkSession
 spark = SparkSession.builder.appName('movie-recommender').getOrCreate()
 
-# Load the ratings data
+#load the data
 ratings_df = spark.read \
     .format("csv") \
     .option("header", "false") \
@@ -17,7 +16,7 @@ ratings_df = spark.read \
     .load("ml-100k/u.data") \
     .toDF("user_id", "movie_id", "rating", "timestamp")
 
-# Convert the user_id and movie_id columns to integer
+#convert the user_id and movie_id columns to integer, and the rating column to double
 ratings_df = ratings_df \
     .withColumn("user_id", ratings_df["user_id"].cast("integer")) \
     .withColumn("movie_id", ratings_df["movie_id"].cast("integer")) \

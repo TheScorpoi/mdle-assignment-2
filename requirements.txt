@@ -2,3 +2,4 @@ pyspark
 scikit-learn
 pandas
 numpy
+matplotlib
